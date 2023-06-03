@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import SingleProduct from '../SingleProduct/SingleProduct';
+import "./AllProducts.css";
 
 function AllProducts() {
 
@@ -7,12 +9,14 @@ function AllProducts() {
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
             .then(res=>res.json())
-            .then(json=>console.log(json))
-    })
+            .then(data=>setAllProductsList(data))
+    },[])
 
   return (
-    <div>
-        <p>This is products</p>
+    <div className='allProducts_container'>
+        {
+            allProductsList.map((pd)=><SingleProduct productDetails={pd} key={pd.id} />)
+        }
     </div>
   )
 }
