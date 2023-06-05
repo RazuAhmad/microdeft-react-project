@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
-const AddNewProduct = () => {
+const AddNewProduct = ({editProductDetails}) => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
+
+  const {title,category,image,price,description}=editProductDetails;
 
   const handleProductNameChange = (event) => {
     setProductName(event.target.value);
@@ -41,6 +43,7 @@ const AddNewProduct = () => {
     setDescription("");
     setCategory("");
     setImageUrl("");
+    
   };
 
   return (
