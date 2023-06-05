@@ -2,37 +2,39 @@ import React, { useState } from "react";
 
 const AddNewProduct = ({editProductDetails}) => {
   const [productName, setProductName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [price, setPrice] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [productCategory, setProductCategory] = useState("");
+  const [productImageUrl, setProductImageUrl] = useState("");
+  const [productPrice, setProductPrice] = useState("");
 
-  const {title,category,image,price,description}=editProductDetails;
+  const {title,category,description,price, image}=editProductDetails;
+  console.log("add new product name is", editProductDetails);
+  
 
   const handleProductNameChange = (event) => {
     setProductName(event.target.value);
   };
 
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    setProductDescription(event.target.value);
   };
 
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+    setProductCategory(event.target.value);
   };
 
   const handleImageUrlChange = (event) => {
-    setImageUrl(event.target.value);
+    setProductImageUrl(event.target.value);
   };
 
   const handlePriceChange = (event) => {
-    setPrice(event.target.value);
+    setProductPrice(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!productName || !description || !category || !imageUrl || !price) {
+    if (!productName || !productDescription || !productCategory || !productImageUrl || !productPrice) {
       alert("Please fill all the fields");
       return;
     }
@@ -40,10 +42,11 @@ const AddNewProduct = ({editProductDetails}) => {
 
     // Clear the form fields
     setProductName("");
-    setDescription("");
-    setCategory("");
-    setImageUrl("");
+    setProductDescription("");
+    setProductCategory("");
+    setProductImageUrl("");
     
+    console.log(event.target.value);
   };
 
   return (
@@ -55,7 +58,7 @@ const AddNewProduct = ({editProductDetails}) => {
           <input
             type="text"
             id="productName"
-            value={productName}
+            defaultValue={title ? title : productName}
             onChange={handleProductNameChange}
           />
         </div>
@@ -63,14 +66,14 @@ const AddNewProduct = ({editProductDetails}) => {
           <label htmlFor="description">Description:</label>
           <textarea
             id="description"
-            value={description}
+            defaultValue={description ? description : productDescription}
             onChange={handleDescriptionChange}
           />
         </div>
         <div>
           <label htmlFor="category">Category:</label>
 
-          <select name="category" onChange={handleCategoryChange}>
+          <select name="category" defaultValue={category ? category : productCategory} onChange={handleCategoryChange}>
             <option value="option1">Select Category</option>
             <option value="Electronics">Electronics</option>
             <option value="Jewelery">Jewelery</option>
@@ -83,7 +86,7 @@ const AddNewProduct = ({editProductDetails}) => {
           <input
             type="text"
             id="imageUrl"
-            value={imageUrl}
+            defaultValue={image ? image : productImageUrl}
             onChange={handleImageUrlChange}
           />
         </div>
@@ -93,9 +96,8 @@ const AddNewProduct = ({editProductDetails}) => {
           <input
             type="number"
             name="quantity"
-            min="1"
-            max="100"
-            step="1"
+            defaultValue={price ? price : productPrice}
+            
             onChange={handlePriceChange}
           />
         </div>
